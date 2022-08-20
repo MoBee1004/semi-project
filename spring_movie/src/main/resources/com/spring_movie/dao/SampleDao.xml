@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  
+  <mapper namespace="com.spring_movie.dao.SampleDao">
+  
+  <insert id="insertLocData">
+  INSERT INTO MAPLOCATION VALUES(#{strRow},'BD001')
+  </insert>
+  
+  <select id="selectLocData" resultType="com.spring_movie.dto.SampleDto">
+ 	SELECT * FROM MAPLOCATION WHERE MID = 'BD001'
+  </select>
+  
+  </mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  
+  <mapper namespace="com.spring_movie.dao.AdminDao">
+  
+  
+  	<update id="toggleState">
+   	UPDATE MOVIES SET MVSTATE = #{state} WHERE MVCODE = #{mvcode}
+   	</update>
+  
+     	
+   	<update id="adminModifyMovie">
+   	UPDATE MOVIES SET MVPD = #{mvpd}, MVACTOR = #{mvactor}, MVGENRE = #{mvgenre}, MVAGE = #{mvage}, MVTIME = #{mvtime}, MVOPEN= #{mvopen} 
+   	WHERE MVCODE= #{mvcode}
+   	</update>
+  
+ 	<select id="getTheaterList" resultType="com.spring_movie.dto.TheaterDto">
+  	SELECT * FROM THEATERS
+   	</select> 
+  
+  
+  	<update id="adminModifyTheater">
+   	UPDATE THEATERS SET THNAME = #{thname}, THADDR = #{thaddr}, THTEL= #{thtel}
+   	WHERE THCODE= #{thcode}
+   	</update>
+   	
+  	<update id="toggleThState">
+   	UPDATE THEATERS SET THSTATE = #{state} WHERE THCODE = #{thcode}
+   	</update>
+   	
+   	<select id="getMovieList" resultType="com.spring_movie.dto.MovieDto">
+  	SELECT * FROM MOVIES
+   	</select> 
+   	
+	<select id="getrecentroomtime_ajax" resultType="com.spring_movie.dto.ScheduleDto">
+  	SELECT CONCAT(SCROOM, TO_CHAR(SCDATE, 'HH24:MI'))AS SCDATE, MV.MVNAME ,MV.MVPOSTER FROM SCHEDULES SC, (SELECT MVPOSTER, MVNAME,MVCODE FROM MOVIES) MV WHERE SC.SCMVCODE=MV.MVCODE AND SCTHCODE= #{scthcode} AND TO_CHAR(SCDATE,'YYYY-MM-DD') = #{scdate}
+   	</select> 
+   	
+   	<insert id="insertScdata">
+   	INSERT INTO SCHEDULES VALUES(#{scroom},TO_DATE(#{scdate},'YYYY-MM-DD HH24:MI:SS'),#{scthcode},#{scmvcode})
+   	</insert>
+   	
+   	<select id="getMemberList" resultType="com.spring_movie.dto.MemberDto">
+  	SELECT * FROM MEMBERS
+   	</select> 
+   	
+   	<update id="changeState">
+   	UPDATE MEMBERS SET MSTATE = (MSTATE + #{inputState}) WHERE MID = #{inputMid}
+   	</update>
+   	
+    </mapper>

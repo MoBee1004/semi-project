@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  
+  <mapper namespace="com.spring_movie.dao.MemberDao">
+  
+    <select id="searchMemberId" resultType="com.spring_movie.dto.MemberDto">
+   	SELECT * FROM MEMBERS WHERE MID= #{kakaoId}
+   	</select> 
+  
+  	<insert id="insertKakaoAccount">
+  	INSERT INTO MEMBERS(MID,MPW,MNAME,MEMAIL,MADDRESS,MPROFILE,MSTATE) VALUES(#{kakaoId},'1111',#{kakaoNickname},#{kakaoEmail},'(주소입력)-(주소입력)-(주소입력)-(주소입력)',#{kakaoProfile},2)
+  	</insert>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    </mapper>
